@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    h1 make POST request
+    form(method='POST', action='/ps4/request')
+        input(type='text', name='city', placeholder='Enter city name')
+        button(type='submit') Request
+    form(method='POST', action='/ps4/async-api-call')
+        input(type='text', name='city', placeholder='Enter city name')
+        button(type='submit') Async
+    form(method='POST', action='/ps4/callback-api-call')
+        input(type='text', name='city', placeholder='Enter city name')
+        button(type='submit') Callback

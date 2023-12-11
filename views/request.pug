@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    if weather
+        h1 Weather in #{weather.location.name}, #{weather.location.country}
+        h2 Current Conditions
+        ul
+            li Temperature: #{weather.current.temp_c}°C (#{weather.current.temp_f}°F)
+            li Weather: #{weather.current.condition.text}
+            li Wind: #{weather.current.wind_kph} kph (#{weather.current.wind_mph} mph)
+            li Humidity: #{weather.current.humidity}%
+            li Pressure: #{weather.current.pressure_mb} mb (#{weather.current.pressure_in} in)
+            li Visibility: #{weather.current.vis_km} km (#{weather.current.vis_miles} miles)
+            li Last Updated: #{weather.current.last_updated}
+    else
+        h1 No weather data available
