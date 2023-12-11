@@ -19,27 +19,6 @@ router.get('/', function(req, res, next) {
     res.render('main');
 });
 
-router.post('/request', (req, res) => {
-    const city = req.body.city;
-    const apiKey = '0d15c86e752a478d8de212106231012';
-    const apiUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
-
-    new Promise((resolve, reject) => {
-        request(apiUrl, { json: true }, (err, response, body) => {
-            if (err) {
-                return reject(err);
-            }
-            resolve(body);
-        })
-    })
-        .then(data => {
-            res.render('request', { weather: data });
-        })
-        .catch(error => {
-            res.status(500).send(error);
-        })
-})
-
 router.post('/async-api-call', async (req, res) => {
     const city = req.body.city;
     const apiKey = '0d15c86e752a478d8de212106231012'; // Make sure to keep your API keys secure
@@ -77,23 +56,5 @@ router.post('/async-api-call', async (req, res) => {
     }
 });
 
-router.post('/callback-api-call', (req, res) => {
-    const city = req.body.city;
-    const apiKey = '0d15c86e752a478d8de212106231012';
-    const apiUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
-
-    request({
-        url: apiUrl,
-        method: 'POST',
-        json: true,
-        body: req.body, // assuming you are sending JSON data
-    }, (error, response, body) => {
-        if (error) {
-            return res.status(500).send(error);
-        }
-
-        res.render('request', { weather: body });
-    });
-});
 
 module.exports = router;
